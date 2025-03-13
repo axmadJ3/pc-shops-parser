@@ -1,0 +1,8 @@
+Запуск Celery Worker:
+    celery -A project worker --loglevel=info
+
+Запуск Celery Beat:
+    celery -A project beat --loglevel=info
+
+Либо одним процессом:
+celery -A project worker --beat --loglevel=info
