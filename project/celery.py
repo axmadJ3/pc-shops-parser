@@ -7,6 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 
 app = Celery('project')
 
+
 # Чтение конфигов Celery из Django settings.py с префиксом CELERY
 app.config_from_object('django.conf:settings', namespace='CELERY')
 

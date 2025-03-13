@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 # Брокер сообщений
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
 
 # Таймзона
 CELERY_TIMEZONE = 'Asia/Tashkent'
@@ -46,18 +47,18 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'tasks.parsing_tasks.run_asaxiy_parser_task',
         'schedule': schedule(run_every=48 * 60 * 60),
     },
-    'parse_olcha_every_48h': {
-        'task': 'tasks.parsing_tasks.run_olcha_parser_task',
-        'schedule': schedule(run_every=48 * 60 * 60),
-    },
-    'parse_zoodmall_every_48h': {
-        'task': 'tasks.parsing_tasks.run_zoodmall_parser_task',
-        'schedule': schedule(run_every=48 * 60 * 60),
-    },
-    'parse_texnomart_every_48h': {
-        'task': 'tasks.parsing_tasks.run_texnomart_parser_task',
-        'schedule': schedule(run_every=48 * 60 * 60),
-    },
+    # 'parse_olcha_every_48h': {
+    #     'task': 'tasks.parsing_tasks.run_olcha_parser_task',
+    #     'schedule': schedule(run_every=48 * 60 * 60),
+    # },
+    # 'parse_zoodmall_every_48h': {
+    #     'task': 'tasks.parsing_tasks.run_zoodmall_parser_task',
+    #     'schedule': schedule(run_every=48 * 60 * 60),
+    # },
+    # 'parse_texnomart_every_48h': {
+    #     'task': 'tasks.parsing_tasks.run_texnomart_parser_task',
+    #     'schedule': schedule(run_every=48 * 60 * 60),
+    # },
 }
 
 # Application definition

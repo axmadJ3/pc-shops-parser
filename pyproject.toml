@@ -10,6 +10,7 @@ dependencies = [
     "django>=5.1.7",
     "django-celery-beat>=2.7.0",
     "django-celery-results>=2.5.1",
+    "redis==4.1.4",
     "requests>=2.32.3",
     "ruff>=0.9.10",
     "selenium>=4.29.0",

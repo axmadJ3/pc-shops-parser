@@ -1,12 +1,13 @@
 from celery import shared_task
-from parsers.asaxiy_parser import parse_asaxiy
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-# from parsers.olcha_parser import parse_olcha
-# from parsers.zoodmall_parser import parse_zoodmall
-# from parsers.texnomart_parser import parse_texnomart
-from services.product_service import save_products_to_db
+from .parsers.asaxiy_parser import parse_asaxiy
+
+# from .parsers.olcha_parser import parse_olcha
+# from .parsers.zoodmall_parser import parse_zoodmall
+# from .parsers.texnomart_parser import parse_texnomart
+from .services.product_service import save_products_to_db
 
 
 def init_driver():
