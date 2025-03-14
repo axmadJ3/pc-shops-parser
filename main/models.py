@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Product(models.Model):
-    site = models.CharField(max_length=100)
+    site = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     price = models.CharField(max_length=50)
     url = models.URLField(max_length=500, unique=True)

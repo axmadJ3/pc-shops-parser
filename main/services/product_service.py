@@ -1,14 +1,18 @@
+import logging
+
 from django.db import transaction
 
 from main.models import Product
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def save_products_to_db(parsed_products):
     if not parsed_products:
-        print("Нет данных для сохранения.")
+        logger.info("Нет данных для сохранения.")
         return
 
-    print(f"Обработка {len(parsed_products)} товаров...")
+    logger.info(f"Обработка {len(parsed_products)} товаров...")
 
     existing_products = Product.objects.filter(
         site__in={p.site for p in parsed_products},
@@ -49,10 +53,10 @@ def save_products_to_db(parsed_products):
     with transaction.atomic():
         if products_to_create:
             Product.objects.bulk_create(products_to_create, batch_size=1000)
-            print(f"Создано товаров: {len(products_to_create)}")
+            logger.info(f"Создано товаров: {len(products_to_create)}")
 
         if products_to_update:
             Product.objects.bulk_update(products_to_update, ['price', 'url', 'image_url'], batch_size=1000)
-            print(f"Обновлено товаров: {len(products_to_update)}")
+            logger.info(f"Обновлено товаров: {len(products_to_update)}")
 
-    print("Сохранение в БД завершено.")
+    logger.info("Сохранение в БД завершено.")

@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 ProductData = namedtuple('ProductData', ['site', 'name', 'price', 'url', 'image_url'])
 
-def parse_asaxiy():
+def parse_glotr():
     """Парсер ноутбуков с сайта Asaxiy.uz с динамической пагинацией."""
     options = webdriver.EdgeOptions()
     options.add_argument("--headless")
@@ -150,4 +150,4 @@ def parse_asaxiy():
 
 # Запуск
 if __name__ == '__main__':
-    parse_asaxiy()
+    parse_glotr()
