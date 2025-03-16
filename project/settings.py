@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-from celery.schedules import schedule
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,37 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Брокер сообщений
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-
-# Таймзона
-CELERY_TIMEZONE = 'Asia/Tashkent'
-
-# Настройки сериализации
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-
-# Для Celery Beat (планировщик)
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
-CELERY_BEAT_SCHEDULE = {
-    'parse_asaxiy_every_48h': {
-        'task': 'tasks.parsing_tasks.run_asaxiy_parser_task',
-        'schedule': schedule(run_every=48 * 60 * 60),
-    },
-    # 'parse_olcha_every_48h': {
-    #     'task': 'tasks.parsing_tasks.run_olcha_parser_task',
-    #     'schedule': schedule(run_every=48 * 60 * 60),
-    # },
-    # 'parse_zoodmall_every_48h': {
-    #     'task': 'tasks.parsing_tasks.run_zoodmall_parser_task',
-    #     'schedule': schedule(run_every=48 * 60 * 60),
-    # },
-    # 'parse_texnomart_every_48h': {
-    #     'task': 'tasks.parsing_tasks.run_texnomart_parser_task',
-    #     'schedule': schedule(run_every=48 * 60 * 60),
-    # },
-}
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -69,9 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # 3rd party
-    'django_celery_beat',
 
     #local
     'main',

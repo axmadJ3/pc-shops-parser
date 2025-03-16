@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 ProductData = namedtuple('ProductData', ['site', 'name', 'price', 'url', 'image_url'])
 
 def parse_glotr():
-    """Парсер ноутбуков с сайта Asaxiy.uz с динамической пагинацией."""
+    """Парсер ноутбуков с сайта glotr.uz."""
     options = webdriver.EdgeOptions()
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
@@ -45,7 +45,7 @@ def parse_glotr():
         base_url = "https://asaxiy.uz/uz/product/kompyutery-i-orgtehnika/noutbuki/noutbuki-2/"
         first_page_url = f"{base_url}?page=1"
 
-        logger.info(f"Загружаем первую страницу: {first_page_url}")
+        logger.info("Загружаем первую страницу: %s", first_page_url)
         driver.get(first_page_url)
 
         # Ждем появления элемента, чтобы страница полностью загрузилась

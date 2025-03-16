@@ -1,7 +1,6 @@
 import logging
 
 from django.db import transaction
-
 from main.models import Product
 
 logging.basicConfig(level=logging.INFO)
@@ -14,26 +13,24 @@ def save_products_to_db(parsed_products):
 
     logger.info(f"Обработка {len(parsed_products)} товаров...")
 
-    existing_products = Product.objects.filter(
-        site__in={p.site for p in parsed_products},
-        name__in={p.name for p in parsed_products}
-    )
-    existing_lookup = {(p.site, p.name): p for p in existing_products}
+    parsed_urls = {p.url for p in parsed_products}
+
+    existing_products = Product.objects.filter(url__in=parsed_urls)
+    existing_lookup = {p.url: p for p in existing_products}
 
     products_to_create = []
     products_to_update = []
 
     for pdata in parsed_products:
-        key = (pdata.site, pdata.name)
-        existing = existing_lookup.get(key)
+        existing = existing_lookup.get(pdata.url)
 
         if existing:
             updated = False
             if existing.price != pdata.price:
                 existing.price = pdata.price
                 updated = True
-            if existing.url != pdata.url:
-                existing.url = pdata.url
+            if existing.name != pdata.name:
+                existing.name = pdata.name
                 updated = True
             if existing.image_url != pdata.image_url:
                 existing.image_url = pdata.image_url
@@ -56,7 +53,7 @@ def save_products_to_db(parsed_products):
             logger.info(f"Создано товаров: {len(products_to_create)}")
 
         if products_to_update:
-            Product.objects.bulk_update(products_to_update, ['price', 'url', 'image_url'], batch_size=1000)
+            Product.objects.bulk_update(products_to_update, ['name', 'price', 'image_url'], batch_size=1000)
             logger.info(f"Обновлено товаров: {len(products_to_update)}")
 
     logger.info("Сохранение в БД завершено.")

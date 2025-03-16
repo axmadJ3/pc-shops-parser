@@ -6,12 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.13.3",
-    "celery>=5.4.0",
     "django>=5.1.7",
-    "django-celery-beat>=2.7.0",
-    "django-celery-results>=2.5.1",
     "lxml>=5.3.1",
-    "redis==4.1.4",
     "requests>=2.32.3",
     "ruff>=0.9.10",
     "selenium>=4.29.0",
@@ -24,7 +20,7 @@ target-version = "py312"
 fix = true
 
 lint.select = ["E", "F", "W", "I", "N", "UP"]
-lint.ignore = ["E501", "E722", "N812"]
+lint.ignore = ["E501", "E722", "N812", "W1203"]
 
 exclude = [
     ".git",
