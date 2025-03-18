@@ -3,6 +3,7 @@ import random
 import tempfile
 import time
 import uuid
+import shutil
 from collections import namedtuple
 
 from bs4 import BeautifulSoup
@@ -17,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 ProductData = namedtuple('ProductData', ['site', 'name', 'price', 'url', 'image_url'])
 
+
 def parse_glotr():
     """Парсер ноутбуков с сайта glotr.uz."""
     options = webdriver.EdgeOptions()
@@ -24,14 +26,17 @@ def parse_glotr():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
-    # Уникальные настройки для профиля браузера
+    USER_AGENTS = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64)...",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)...",
+    ]
+    options.add_argument(f"user-agent={random.choice(USER_AGENTS)}")
+
     user_data_dir = f"{tempfile.gettempdir()}/edge_profile_{uuid.uuid4().hex}"
     options.add_argument(f"--user-data-dir={user_data_dir}")
     options.add_argument(f"--remote-debugging-port={random.randint(1024, 49151)}")
 
-    # Отключение автоматизации
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("useAutomationExtension", False)
 
@@ -41,112 +46,104 @@ def parse_glotr():
         parsed_products = []
         seen_links = set()
 
-        # Переход на первую страницу и получение общего количества страниц
-        base_url = "https://asaxiy.uz/uz/product/kompyutery-i-orgtehnika/noutbuki/noutbuki-2/"
+        base_url = "https://glotr.uz/noutbuklar/"
         first_page_url = f"{base_url}?page=1"
 
-        logger.info("Загружаем первую страницу: %s", first_page_url)
         driver.get(first_page_url)
-
-        # Ждем появления элемента, чтобы страница полностью загрузилась
         WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "product__item__info-title"))
+            EC.presence_of_element_located((By.CLASS_NAME, "product-card__content"))
         )
+        # first_page_soup = BeautifulSoup(driver.page_source, "lxml")
 
-        # soup = BeautifulSoup(driver.page_source, "lxml")
+        # pagination = first_page_soup.find("ul", class_="pagination")
+        # if pagination:
+        #     last_page = pagination.find_all("li")[-1].find("a")
+        #     total_pages = int(last_page.text.strip()) if last_page and last_page.text.isdigit() else 1
+        # else:
+        #     total_pages = 1
 
-        # определение количества страниц
-        # total_products_text = soup.find('div', class_="subcategories__wrapper").find("p", class_="product-count").text.strip()
-        # total_products = int(total_products_text.split()[0])
-        # logger.info(f"Обнаружено товаров: {total_products}")
+        total_pages = 5
+        logger.info(f"Найдено страниц: {total_pages}")
 
-        # total_pages = math.ceil(total_products / 24)
-        total_pages = 22
-        logger.info(f"Обнаружено страниц: {total_pages}")
-
-        # Проход по всем страницам
         for page_number in range(1, total_pages + 1):
             url = f"{base_url}?page={page_number}"
-            logger.info(f"Обработка страницы {page_number}: {url}")
+            driver.get(url)
 
-            try:
-                driver.get(url)
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "row.products-wrap"))
+            )
 
-                WebDriverWait(driver, 15).until(
-                    EC.presence_of_element_located((By.CLASS_NAME, "product__item__info-title"))
-                )
+            page_soup = BeautifulSoup(driver.page_source, "lxml")
 
-                page_soup = BeautifulSoup(driver.page_source, "lxml")
-
-                products = page_soup.find_all("div", class_="col-6 col-xl-3 col-md-4")
-
-                if not products:
-                    logger.info(f"На странице {page_number} нет товаров")
-                    continue
-
-                for product in products:
-                    try:
-                        # Ссылка на товар
-                        links = product.find_all("a", href=True)
-                        full_link = None
-                        for link_tag in links:
-                            href = link_tag.get("href")
-                            if href and "/product/" in href:
-                                full_link = "https://asaxiy.uz" + href
-                                break
-
-                        # Пропуск повторов
-                        if not full_link or full_link in seen_links:
-                            continue
-
-                        seen_links.add(full_link)
-
-                        # Название товара
-                        title = product.find("span", class_="product__item__info-title").text.strip()
-
-                        # Цена товара
-                        price_element = product.find("span", class_="product__item-price")
-                        price = price_element.text.strip().replace("so'm", "").replace(" ", "").replace("\xa0", "") if price_element else "0"
-
-                        # Картинка товара
-                        img_container = product.find("div", class_="product__item-img")
-                        img_tag = img_container.find("img") if img_container else None
-                        image_url = img_tag.get('data-src', '') if img_tag else ''
-
-                        parsed_products.append(ProductData(
-                            site="Asaxiy",
-                            name=title,
-                            price=price,
-                            url=full_link,
-                            image_url=image_url
-                        ))
-
-                        # Вывод товара в консоль
-                        print(f'asaxiy | {title} | {price} | {full_link} | {image_url}')
-
-                    except Exception as e:
-                        logger.error(f"Ошибка при парсинге товара на странице {page_number}: {e}", exc_info=True)
-
-                # Задержка после обработки страницы
-                time.sleep(random.uniform(1.5, 3.0))
-
-            except Exception as e:
-                logger.warning(f"Ошибка загрузки страницы {page_number}: {e}", exc_info=True)
+            products = page_soup.find_all("div", class_="col-lg-20 col-6 product-card__parent")
+            if not products:
+                logger.info(f"На странице {page_number} нет товаров")
                 continue
 
-        logger.info(f"Всего собрано товаров: {len(parsed_products)}")
+            for product in products:
+                try:
+                    link = product.find("a")
+                    full_link = f"https://glotr.uz{link.get('href')}" if link else ""
+                    if not full_link or full_link in seen_links:
+                        continue
+                    seen_links.add(full_link)
+
+                    title = product.find("a", class_="product-card__link text-overflow-two-line").text
+                    if not title:
+                        title = link.get('href').replace("/", "").replace("-", " ")
+                         
+                    price_element = product.find("div", class_="price-retail")
+                    price = price_element.get_text(strip=True).replace("so'm", "").replace(" ", "") if price_element else "0"
+
+                    # Картинка товара
+                    img_container = product.find("div", class_="product-card__header").find("div", class_="product-card__swiper-item")
+                    img_tag = img_container.find("img") if img_container else None
+
+                    image_url = ""
+                    if img_tag:
+                        image_url = img_tag.get("src", "").strip()
+
+                        if not image_url or image_url.startswith("data:image"):
+                            image_url = (
+                                img_tag.get("data-src") or
+                                img_tag.get("data-original") or
+                                img_tag.get("srcset") or
+                                ""
+                            )
+
+                            if image_url and "," in image_url:
+                                image_url = image_url.split(",")[0].split()[0]
+
+                        if image_url and image_url.startswith("/"):
+                            image_url = "https://glotr.uz" + image_url
+
+                    parsed_products.append(ProductData(
+                        site="Glotr",
+                        name=title,
+                        price=price,
+                        url=full_link,
+                        image_url=image_url
+                    ))
+
+                    print(f'glotr | {title} | {price} | {full_link} | {image_url}')
+
+                except Exception as e:
+                    logger.error(f"Ошибка при парсинге товара на странице {page_number}: {e}", exc_info=True)
+
+            time.sleep(random.uniform(1.5, 3.0))
+
+        logger.info(f"Собрано товаров: {len(parsed_products)}")
         return parsed_products
 
     except Exception as e:
-        logger.error(f"Критическая ошибка при парсинге: {e}", exc_info=True)
+        logger.error(f"Критическая ошибка парсинга: {e}", exc_info=True)
         return []
 
     finally:
-        try:
-            driver.quit()
-            logger.info("Драйвер закрыт успешно")
-        except Exception as e:
-            logger.warning(f"Ошибка при закрытии драйвера: {e}")
+        driver.quit()
+        shutil.rmtree(user_data_dir, ignore_errors=True)
+        logger.info("Драйвер закрыт и профиль удалён")
+
 
 # Запуск
 if __name__ == '__main__':

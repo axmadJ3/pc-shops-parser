@@ -14,7 +14,7 @@ class Product(models.Model):
         db_table = 'products'
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
-        unique_together = ('site', 'name')
+        unique_together = ('url', 'name')
 
     def __str__(self):
         return f'{self.name} ({self.site})'
