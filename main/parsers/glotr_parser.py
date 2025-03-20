@@ -1,9 +1,9 @@
 import logging
 import random
+import shutil
 import tempfile
 import time
 import uuid
-import shutil
 from collections import namedtuple
 
 from bs4 import BeautifulSoup
@@ -91,7 +91,7 @@ def parse_glotr():
                     title = product.find("a", class_="product-card__link text-overflow-two-line").text
                     if not title:
                         title = link.get('href').replace("/", "").replace("-", " ")
-                         
+
                     price_element = product.find("div", class_="price-retail")
                     price = price_element.get_text(strip=True).replace("so'm", "").replace(" ", "") if price_element else "0"
 
