@@ -1,6 +1,7 @@
 from .parsers.asaxiy_parser import parse_asaxiy
 from .parsers.glotr_parser import parse_glotr
 from .parsers.mediapark_parser import parse_mediapark
+from .parsers.zoodmall_parser import parse_zoodmall
 from .services.product_service import save_products_to_db
 
 
@@ -19,4 +20,10 @@ def run_glotr_parser():
 def run_mediapark_parser():
     print("Запуск парсера Mediapark")
     products = parse_mediapark()
+    save_products_to_db(products)
+
+
+def run_zoodmall_parser():
+    print("Запуск парсера Mediapark")
+    products = parse_zoodmall()
     save_products_to_db(products)
