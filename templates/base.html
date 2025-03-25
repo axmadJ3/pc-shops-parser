@@ -49,7 +49,7 @@
       <div class="row">
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
           <!-- logo start -->
-          <div class="logo"> <a href="it_home.html"><img src="{% static 'images/logos/it_logo.png' %}" alt="logo" /></a> </div>
+          <div class="logo"> <a href="{% url 'main:home' %}"><img src="{% static 'images/logos/it_logo.png' %}" alt="logo" /></a> </div>
           <!-- logo end -->
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
@@ -58,13 +58,13 @@
             <div id="navbar_menu">
               <ul class="first-ul">
                 <li>
-                  <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'main:home' %}">Home</a>
+                  <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'main:home' %}">bosh saxifa</a>
                 </li>
                 <li>
-                  <a class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'main:about' %}">About Us</a>
+                  <a class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'main:about' %}">Biz xaqimizda</a>
                 </li>
                 <li> 
-                  <a class="{% if request.resolver_match.url_name == 'products_list' %}active{% endif %}" href="{% url 'main:products_list' %}">Products</a>
+                  <a class="{% if request.resolver_match.url_name == 'products-list' %}active{% endif %}" href="{% url 'main:products-list' %}">Mahsulotlar</a>
                 </li>
               </ul>
             </div>
@@ -438,9 +438,9 @@
           <div class="col-lg-8 col-md-8 col-sm-8 offset-lg-2 offset-md-2 offset-sm-2 col-xs-10 col-xs-offset-1">
             <div class="navbar-search">
               <form action="#" method="get" id="search-global-form" class="search-global">
-                <input type="text" placeholder="Type to search" autocomplete="off" name="s" id="search" value="" class="search-global__input">
+                <input type="text" placeholder="Qidirish" autocomplete="off" name="s" id="search" value="" class="search-global__input">
                 <button class="search-global__btn"><i class="fa fa-search"></i></button>
-                <div class="search-global__note">Begin typing your search above and press return to search.</div>
+                <div class="search-global__note">Masalan Samsung Galaxy Book 4 Pro 360 8gb 15"</div>
               </form>
             </div>
           </div>

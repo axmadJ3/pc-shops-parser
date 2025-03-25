@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load humanize %}
 
 
 {% block content %}
-
 <div class="bg_load"> <img class="loader_animation" src="{% static 'images/loaders/loader_1.png' %}" alt="#" /> </div>
 
 <div class="section padding_layout_1 product_list_main">
@@ -24,10 +24,10 @@
                         </div>
                         <div class="product_detail_btm">
                             <div class="center">
-                            <h4><a href="it_shop_detail.html">{{ product.name|truncatechars:50 }}</a></h4>
+                            <h4><a href="{% url 'main:product-detail' product.pk %}">{{ product.name|truncatechars:50 }}</a></h4>
                             </div>
-                            <div class="product_price">
-                            <span class="new_price">{{ product.price }}</span>Uzs</p>
+                            <div class="product_price">...
+                                <span class="new_price">{{ product.price|floatformat:2|intcomma }}</span><b> Uzs</b></p>
                             </div>
                         </div>
                         </div>
@@ -37,52 +37,49 @@
         </div>
         <div class="col-md-3">
             <div class="side_bar">
-            <div class="side_bar_blog">
-                <h4>SEARCH</h4>
-                <div class="side_bar_search">
-                <div class="input-group stylish-input-group">
-                    <input class="form-control" placeholder="Search" type="text">
-                    <span class="input-group-addon">
-                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </span> </div>
+                <div class="side_bar_blog">
+                    <h4>SEARCH</h4>
+                    <div class="side_bar_search">
+                    <div class="input-group stylish-input-group">
+                        <input class="form-control" placeholder="Search" type="text">
+                        <span class="input-group-addon">
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span> </div>
+                    </div>
+                </div>
+                <div class="side_bar_blog">
+                    <h4>Onlayn do'konlar </h4>
+                    <div class="categary">
+                        <ul>
+                            <li><a href="{% url 'main:products-list' %}" class="{% if not selected_site %}active{% endif %}">Hammasi</a></li>
+                            {% for site in sites %}
+                                <li>
+                                    <a href="{% url 'main:products-list-filtered' site %}" class="{% if site == selected_site %}active{% endif %}">
+                                        <i class="fa fa-angle-right"></i> {{ site }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="side_bar_blog">
-                <h4>OUR SERVICE</h4>
-                <div class="categary">
-                <ul>
-                    <li><a href="it_data_recovery.html"><i class="fa fa-angle-right"></i> Data recovery</a></li>
-                    <li><a href="it_computer_repair.html"><i class="fa fa-angle-right"></i> Computer repair</a></li>
-                    <li><a href="it_mobile_service.html"><i class="fa fa-angle-right"></i> Mobile service</a></li>
-                    <li><a href="it_network_solution.html"><i class="fa fa-angle-right"></i> Network solutions</a></li>
-                    <li><a href="it_techn_support.html"><i class="fa fa-angle-right"></i> Technical support</a></li>
-                </ul>
-                </div>
-            </div>
-            <div class="side_bar_blog">
-                <h4>RECENT NEWS</h4>
-                <div class="categary">
-                <ul>
-                    <li><a href="it_data_recovery.html"><i class="fa fa-angle-right"></i> Land lights let be divided</a></li>
-                    <li><a href="it_computer_repair.html"><i class="fa fa-angle-right"></i> Seasons over bearing air</a></li>
-                    <li><a href="it_mobile_service.html"><i class="fa fa-angle-right"></i> Greater open after grass</a></li>
-                    <li><a href="it_network_solution.html"><i class="fa fa-angle-right"></i> Gathered was divide second</a></li>
-                </ul>
-                </div>
-            </div>
-            <div class="side_bar_blog">
-                <h4>TAG</h4>
-                <div class="tags">
-                <ul>
-                    <li><a href="#">Bootstrap</a></li>
-                    <li><a href="#">HTML5</a></li>
-                    <li><a href="#">Wordpress</a></li>
-                    <li><a href="#">Bootstrap</a></li>
-                    <li><a href="#">HTML5</a></li>
-                </ul>
-                </div>
-            </div>
-            </div>
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; Birinchi</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Avvalgi</a>
+                {% endif %}
+        
+                <span class="current">
+                    {{ page_obj.number }} - {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Keyingi</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">Oxirgi &raquo;</a>
+                {% endif %}
+            </span>
         </div>
     </div>
   </div>

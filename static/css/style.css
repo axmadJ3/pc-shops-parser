@@ -2753,6 +2753,11 @@ span.skill {
 	color: #fff;
 }
 
+.categary ul li a.active {
+    font-weight: bold;
+    color: #40ba37;
+}
+
 .tags a {
 	border: solid 1px #e1e1e1;
 	border-radius: 50px;
@@ -4799,4 +4804,3 @@ footer ul.social_icons {
 .product_detail_side.detail_style1 {
 	margin-top: 35px;
 }
-

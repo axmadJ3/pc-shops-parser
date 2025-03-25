@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load humanize %}
 
 {% block active_class %}active{% endblock %}
 
@@ -25,14 +26,17 @@
               <div class="product_img"> <img class="img-responsive" src="{{ product.image_url }}" alt=""> </div>
               <div class="product_detail_btm">
                 <div class="center">
-                  <h4><a href="it_shop_detail.html">{{ product.name }}</a></h4>
+                  <h4><a href="{% url 'main:product-detail' product.pk %}">{{ product.name }}</a></h4>
                 </div>
                 <div class="product_price">
-                  <p><span class="new_price">{{ product.price }}</span>Uzs</p>
-                </div>
+                  <p>
+                    <span class="new_price">{{ product.price|floatformat:2|intcomma }}</span>
+                    <b> UZS </b>
+                  </p>
+                </div>                
               </div>
             </div>
-          </div>
+          </div>  
         {% endfor %}
       </div>
     </div>
