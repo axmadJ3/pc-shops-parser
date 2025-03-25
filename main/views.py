@@ -11,6 +11,15 @@ def home(request):
     return render(request, 'main/index.html', context=context)
 
 
+def products_list(request):
+    products = Product.objects.all()[:15]
+    context = {
+        'title': 'Products',
+        'products': products,
+    }
+    return render(request, 'main/products_list.html', context=context)
+
+
 def about(request):
     context = {
         'title': 'About'
