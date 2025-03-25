@@ -57,10 +57,14 @@
           <div class="menu_side">
             <div id="navbar_menu">
               <ul class="first-ul">
-                <li> <a class="active" href="it_home.html">Home</a>
+                <li>
+                  <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'main:home' %}">Home</a>
                 </li>
-                <li><a href="it_about.html">About Us</a></li>
-                <li> <a href="it_shop.html">Shop</a>
+                <li>
+                  <a class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'main:about' %}">About Us</a>
+                </li>
+                <li> 
+                  <a href="it_shop.html">Shop</a>
                   <ul>
                     <li><a href="it_shop.html">Shop List</a></li>
                     <li><a href="it_shop_detail.html">Shop Detail</a></li>
