@@ -13,12 +13,16 @@ def home(request):
     return render(request, 'main/index.html', context=context)
 
 
-def products_list(request, site=None):
+def products_list(request, site=None, brand=None):
     products = Product.objects.all()
+
     if site:
         products = products.filter(site=site)
+    if brand:
+        products = products.filter(name__icontains=brand)  # Поиск без учета регистра
 
-    paginator = Paginator(products, 12)  # 10 товаров на страницу
+    brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Lenovo', 'HP', 'Dell', 'Asus', 'Acer', 'MSI']
+    paginator = Paginator(products, 12)  # 12 товаров на страницу
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -27,7 +31,9 @@ def products_list(request, site=None):
         'title': 'Mahsulotlar',
         'sites': sites,
         'products': page_obj,
+        'brands': brands,
         'selected_site': site,
+        'selected_brand': brand,
         'page_obj': page_obj
     }
     return render(request, 'main/products_list.html', context=context)

@@ -12,29 +12,35 @@
     <div class="row">
         <div class="col-md-9">
             <div class="row">
-                {% for product in products %}
-                    <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
-                        <div class="product_list">
-                        <div class="product_img"> 
-                            {% if product.image_url %}
-                                <img class="img-responsive" src="{{ product.image_url }}">
-                            {% else %}
-                                <img class="img-responsive" src="{% static 'images/not_found.webp' %}" alt="Rasm yo'q">
-                            {% endif %}
-                        </div>
-                        <div class="product_detail_btm">
-                            <div class="center">
-                            <h4><a href="{% url 'main:product-detail' product.pk %}">{{ product.name|truncatechars:50 }}</a></h4>
+                {% if  products %}
+                    {% for product in products %}
+                        <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
+                            <div class="product_list">
+                            <div class="product_img"> 
+                                {% if product.image_url %}
+                                    <img class="img-responsive" src="{{ product.image_url }}">
+                                {% else %}
+                                    <img class="img-responsive" src="{% static 'images/not_found.webp' %}" alt="Rasm yo'q">
+                                {% endif %}
                             </div>
-                            <div class="product_price">...
-                                <span class="new_price">{{ product.price|floatformat:2|intcomma }}</span><b> Uzs</b></p>
+                            <div class="product_detail_btm">
+                                <div class="center">
+                                <h4><a href="{% url 'main:product-detail' product.pk %}">{{ product.name|truncatechars:50 }}</a></h4>
+                                </div>
+                                <div class="product_price">...
+                                    <span class="new_price">{{ product.price|floatformat:2|intcomma }}</span><b> Uzs</b></p>
+                                </div>
+                            </div>
                             </div>
                         </div>
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <h3>Hech narsa topilmadi</h3>
+                {% endif %}
             </div>
         </div>
+
+
         <div class="col-md-3">
             <div class="side_bar">
                 <div class="side_bar_blog">
@@ -51,14 +57,16 @@
                     <h4>Onlayn do'konlar </h4>
                     <div class="categary">
                         <ul>
-                            <li><a href="{% url 'main:products-list' %}" class="{% if not selected_site %}active{% endif %}">Hammasi</a></li>
+                            <li><a href="{% url 'main:products-list' %}" class="{% if not selected_brand and not selected_site %}active{% endif %}">Hammasi</a></li>
                             {% for site in sites %}
                                 <li>
-                                    <a href="{% url 'main:products-list-filtered' site %}" class="{% if site == selected_site %}active{% endif %}">
+                                    <a href="{% url 'main:products-list-filtered' site=site %}" class="{% if site == selected_site %}active{% endif %}">
                                         <i class="fa fa-angle-right"></i> {{ site }}
                                     </a>
                                 </li>
                             {% endfor %}
+                            
+
                         </ul>
                     </div>
                 </div>
@@ -66,19 +74,20 @@
                     <h4>Brand </h4>
                     <div class="categary">
                         <ul>
-                            <li><a href="{% url 'main:products-list' %}" class="{% if not selected_site %}active{% endif %}">Hammasi</a></li>
-                            {% for site in sites %}
+                            {% for brand in brands %}
                                 <li>
-                                    <a href="{% url 'main:products-list-filtered' site %}" class="{% if site == selected_site %}active{% endif %}">
-                                        <i class="fa fa-angle-right"></i> {{ site }}
+                                    <a href="{% if selected_site %}{% url 'main:products-list-filtered-both' site=selected_site brand=brand %}{% else %}{% url 'main:products-list-filtered-brand' brand=brand %}{% endif %}" class="{% if brand == selected_brand %}active{% endif %}">
+                                        <i class="fa fa-angle-right"></i> {{ brand }}
                                     </a>
                                 </li>
                             {% endfor %}
                         </ul>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
+
+        
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
