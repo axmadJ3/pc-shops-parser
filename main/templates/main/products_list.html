@@ -38,10 +38,10 @@
         <div class="col-md-3">
             <div class="side_bar">
                 <div class="side_bar_blog">
-                    <h4>SEARCH</h4>
+                    <h4>QIDIRISH</h4>
                     <div class="side_bar_search">
                     <div class="input-group stylish-input-group">
-                        <input class="form-control" placeholder="Search" type="text">
+                        <input class="form-control" placeholder="Qidirish uchun..." type="text">
                         <span class="input-group-addon">
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </span> </div>
@@ -62,12 +62,27 @@
                         </ul>
                     </div>
                 </div>
+                <div class="side_bar_blog">
+                    <h4>Brand </h4>
+                    <div class="categary">
+                        <ul>
+                            <li><a href="{% url 'main:products-list' %}" class="{% if not selected_site %}active{% endif %}">Hammasi</a></li>
+                            {% for site in sites %}
+                                <li>
+                                    <a href="{% url 'main:products-list-filtered' site %}" class="{% if site == selected_site %}active{% endif %}">
+                                        <i class="fa fa-angle-right"></i> {{ site }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; Birinchi</a>
+                    <a href="?page=1">&laquo;</a>
                     <a href="?page={{ page_obj.previous_page_number }}">Avvalgi</a>
                 {% endif %}
         
@@ -77,7 +92,7 @@
         
                 {% if page_obj.has_next %}
                     <a href="?page={{ page_obj.next_page_number }}">Keyingi</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">Oxirgi &raquo;</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a>
                 {% endif %}
             </span>
         </div>
