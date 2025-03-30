@@ -18,9 +18,13 @@
                             <div class="product_list">
                             <div class="product_img"> 
                                 {% if product.image_url %}
-                                    <img class="img-responsive" src="{{ product.image_url }}">
+                                    <a href="{% url 'main:product-detail' product.pk %}">
+                                        <img class="img-responsive" src="{{ product.image_url }}" >
+                                    </a>
                                 {% else %}
-                                    <img class="img-responsive" src="{% static 'images/not_found.webp' %}" alt="Rasm yo'q">
+                                    <a href="{% url 'main:product-detail' product.pk %}">
+                                        <img class="img-responsive" src="{% static 'images/not_found.webp' %}" alt="Rasm yo'q">
+                                    </a>
                                 {% endif %}
                             </div>
                             <div class="product_detail_btm">
@@ -88,23 +92,65 @@
         </div>
 
         
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo;</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">Avvalgi</a>
-                {% endif %}
-        
-                <span class="current">
-                    {{ page_obj.number }} - {{ page_obj.paginator.num_pages }}.
-                </span>
-        
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">Keyingi</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
+        {% if page_obj.paginator.num_pages > 1 %}
+            <nav aria-label="Navigatsiya">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1" aria-label="Boshi">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Avvalgi">
+                                <span aria-hidden="true">&lsaquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo; </span>
+                        </li>
+                        <li class="page-item disabled">
+                            <span class="page-link">&lsaquo;</span>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Keyingi">
+                                <span aria-hidden="true">&rsaquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Oxirgi">
+                                <span aria-hidden="true"> &raquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&rsaquo;</span>
+                        </li>
+                        <li class="page-item disabled">
+                            <span class="page-link"> &raquo;</span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
     </div>
   </div>
 </div>

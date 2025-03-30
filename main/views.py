@@ -21,7 +21,7 @@ def products_list(request, site=None, brand=None):
     if brand:
         products = products.filter(name__icontains=brand)  # Поиск без учета регистра
 
-    brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Lenovo', 'HP', 'Dell', 'Asus', 'Acer', 'MSI']
+    brands = ['Apple', 'Samsung', 'Huawei', 'Lenovo', 'HP', 'Dell', 'Asus', 'Acer', 'MSI']
     paginator = Paginator(products, 12)  # 12 товаров на страницу
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

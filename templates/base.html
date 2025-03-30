@@ -38,9 +38,11 @@
 </head>
 <body id="default_theme" class="it_service">
 
+  
 {% if title == "Bosh sahifa" %}
 <div class="bg_load"> <img class="loader_animation" src="images/loaders/loader_1.png" alt="#" /> </div>
 {% endif %}
+
 
 <header id="default_header" class="header_style_1">
   <!-- header bottom -->
@@ -58,7 +60,7 @@
             <div id="navbar_menu">
               <ul class="first-ul">
                 <li>
-                  <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'main:home' %}">bosh saxifa</a>
+                  <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'main:home' %}">Bosh saxifa</a>
                 </li>
                 <li>
                   <a class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'main:about' %}">Biz xaqimizda</a>
@@ -104,6 +106,7 @@
   </div>
 {%endif%}
 
+
 {% if title == "Bosh sahifa" %}
 <div id="slider" class="section main_slider">
   <div class="container-fuild">
@@ -112,9 +115,9 @@
         <!-- START REVOLUTION SLIDER 5.0.7 auto mode -->
         <div id="rev_slider_4_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
           <ul>
-            <li data-index="rs-1812" data-transition="zoomin" data-slotamount="7"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000"  data-thumb="{% static 'images/it_service/slide1.jpg' %}"  data-rotate="0"  data-saveperformance="off"  data-title="Computer Services" data-description="">
+            <li data-index="rs-1812" data-transition="zoomin" data-slotamount="7"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000"  data-thumb="{% static 'images/it_service/game_laptop.jpg' %}"  data-rotate="0"  data-saveperformance="off"  data-title="Computer Services" data-description="">
               <!-- MAIN IMAGE -->
-              <img src="{% static 'images/it_service/slide1.jpg' %}"  alt="#"  data-bgposition="center center" data-kenburns="on" data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+              <img src="{% static 'images/it_service/game_laptop.jpg' %}"  alt="#"  data-bgposition="center center" data-kenburns="on" data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10" class="rev-slidebg" data-no-retina>
               <!-- LAYERS -->
               <!-- LAYER NR. BG -->
               <div class="tp-caption tp-shape tp-shapewrapper   rs-parallaxlevel-0" 
@@ -168,7 +171,7 @@
                               data-splitout="none" 
                               data-responsive_offset="on" 
                               data-elementdelay="0.05" 
-                              style="z-index: 6; white-space: nowrap;">Computer Services </div>
+                              style="z-index: 6; white-space: nowrap;">O'yin uchun</div>
               <!-- LAYER NR. 3 -->
               <div class="tp-caption NotGeneric-SubTitle   tp-resizeme rs-parallaxlevel-0" 
                               id="slide-18-layer-412" 
@@ -186,11 +189,11 @@
                               data-splitin="none" 
                               data-splitout="none" 
                               data-responsive_offset="on" 
-                              style="z-index: 7; white-space: nowrap;">Available On It.Next </div>
+                              style="z-index: 7; white-space: nowrap;">noutbuklar it.next da</div>
             </li>
-            <li data-index="rs-181" data-transition="zoomin" data-slotamount="7"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000"  data-thumb="{% static 'images/it_service/slide2.jpg' %}"  data-rotate="0"  data-saveperformance="off"  data-title="Easy To Use & Customize" data-description="">
+            <li data-index="rs-181" data-transition="zoomin" data-slotamount="7"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000"  data-thumb="{% static 'images/it_service/office_laptop.jpg' %}"  data-rotate="0"  data-saveperformance="off"  data-title="Easy To Use & Customize" data-description="">
               <!-- MAIN IMAGE -->
-              <img src="{% static 'images/it_service/slide2.jpg' %}"  alt=""  data-bgposition="center center" data-kenburns="on" data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+              <img src="{% static 'images/it_service/office_laptop.jpg' %}"  alt=""  data-bgposition="center center" data-kenburns="on" data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10" class="rev-slidebg" data-no-retina>
               <!-- LAYERS -->
               <!-- LAYER NR. BG -->
               <div class="tp-caption tp-shape tp-shapewrapper   rs-parallaxlevel-0" 
@@ -244,7 +247,7 @@
                               data-splitout="none" 
                               data-responsive_offset="on" 
                               data-elementdelay="0.05" 
-                              style="z-index: 6; white-space: nowrap;">Fast & Affordable </div>
+                              style="z-index: 6; white-space: nowrap;">Ofis uchun</div>
               <!-- LAYER NR. 3 -->
               <div class="tp-caption NotGeneric-SubTitle   tp-resizeme rs-parallaxlevel-0" 
                               id="slide-18-layer-41" 
@@ -262,11 +265,11 @@
                               data-splitin="none" 
                               data-splitout="none" 
                               data-responsive_offset="on" 
-                              style="z-index: 7; white-space: nowrap;">Available On It.Next </div>
+                              style="z-index: 7; white-space: nowrap;">noutbuklar it.next da</div>
             </li>
-            <li data-index="rs-18" data-transition="zoomin" data-slotamount="7"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000"  data-thumb="{% static 'images/it_service/slide3.jpg' %}"  data-rotate="0"  data-saveperformance="off"  data-title="Perfectly Responsive" data-description="">
+            <li data-index="rs-18" data-transition="zoomin" data-slotamount="7"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000"  data-thumb="{% static 'images/it_service/work_laptop.jpg' %}"  data-rotate="0"  data-saveperformance="off"  data-title="Perfectly Responsive" data-description="">
               <!-- MAIN IMAGE -->
-              <img src="{% static 'images/it_service/slide3.jpg' %}"  alt=""  data-bgposition="center center" data-kenburns="on" data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+              <img src="{% static 'images/it_service/work_laptop.jpg' %}"  alt=""  data-bgposition="center center" data-kenburns="on" data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10" class="rev-slidebg" data-no-retina>
               <!-- LAYERS -->
               <!-- LAYER NR. BG -->
               <div class="tp-caption tp-shape tp-shapewrapper   rs-parallaxlevel-0" 
@@ -320,7 +323,7 @@
                               data-splitout="none" 
                               data-responsive_offset="on" 
                               data-elementdelay="0.05" 
-                              style="z-index: 6; white-space: nowrap;">We Will Fix It </div>
+                              style="z-index: 6; white-space: nowrap;">og'ir dasturlar uchun</div>
               <!-- LAYER NR. 3 -->
               <div class="tp-caption NotGeneric-SubTitle   tp-resizeme rs-parallaxlevel-0" 
                               id="slide-18-layer-4" 
@@ -338,7 +341,7 @@
                               data-splitin="none" 
                               data-splitout="none" 
                               data-responsive_offset="on" 
-                              style="z-index: 7; white-space: nowrap;">Available On It.Next </div>
+                              style="z-index: 7; white-space: nowrap;">noutbuklar it.next da</div>
             </li>
           </ul>
           <div class="tp-static-layers"></div>
@@ -348,14 +351,14 @@
   </div>
 </div>
 
+
 <div class="section padding_layout_1">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="full">
           <div class="main_heading text_align_center">
-            <h2>Why Choose Us</h2>
-            <p class="large">Fastest repair service with best price!</p>
+            <h2>Nega bizni tanlaysiz?</h2>
           </div>
         </div>
       </div>
@@ -366,35 +369,35 @@
           <div class="center">
             <div class="icon"> <img src="{% static 'images/it_service/i1.png' %}" alt="#" /> </div>
           </div>
-          <h4 class="theme_color">Data recovery</h4>
-          <p>Perspiciatis eos quos totam cum minima aut!</p>
+          <h4 class="theme_color">Eng yaxshi takliflar bir joyda</h4>
+          <p>O‘zingizga mos modelni eng arzon narxda tez va oson topa olasiz.</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
         <div class="full text_align_center margin_bottom_30">
           <div class="center">
-            <div class="icon"> <img src="{% static 'images/it_service/i2.png' %}" alt="#" /> </div>
+            <div class="icon"> <img src="{% static 'images/it_service/i2.png' %}" alt="#"/> </div>
           </div>
-          <h4 class="theme_color">Computer repair</h4>
-          <p>Perspiciatis eos quos totam cum minima aut!</p>
+          <h4 class="theme_color">Vaqtni tejash</h4>
+          <p>O‘nlab saytlarni kezib chiqishni unuting.</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
         <div class="full text_align_center margin_bottom_30">
           <div class="center">
-            <div class="icon"> <img src="{% static 'images/it_service/i3.png' %}" alt="#" /> </div>
+            <div class="icon"> <img src="{% static 'images/it_service/i3.png' %}" alt="#"/> </div>
           </div>
-          <h4 class="theme_color">Mobile service</h4>
-          <p>Perspiciatis eos quos totam cum minima aut!</p>
+          <h4 class="theme_color">Ishonchlilik va aniqli</h4>
+          <p>Biz faqat tasdiqlangan manbalar bilan ishlaymiz</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
         <div class="full text_align_center margin_bottom_30 margin_0">
           <div class="center">
-            <div class="icon"> <img src="{% static 'images/it_service/i4.png' %}" alt="#" /> </div>
+            <div class="icon"> <img src="{% static 'images/it_service/i4.png' %}" alt="#"/> </div>
           </div>
-          <h4 class="theme_color">Network solutions</h4>
-          <p>Perspiciatis eos quos totam cum minima aut!</p>
+          <h4 class="theme_color">Tanlash qulayligi</h4>
+          <p>Hammasi bitta platformada</p>
         </div>
       </div>
     </div>
@@ -402,9 +405,11 @@
 </div>
 {% endif %}
 
+
 {% block content %}
 
 {% endblock content %}
+
 
 {% if title == "Bosh sahifa" %}
   <div class="section padding_layout_1" style="padding: 50px 0;">
@@ -413,11 +418,21 @@
         <div class="col-md-12">
           <div class="full">
             <ul class="brand_list">
-              <li><img src="{% static 'images/it_service/asus.png' %}" alt="#" width="140" height="50"/></li>
-              <li><img src="{% static 'images/it_service/hp.png' %}" alt="#" width="140" height="50"/></li>
-              <li><img src="{% static 'images/it_service/acer.png' %}" alt="#" width="140" height="50"/></li>
-              <li><img src="{% static 'images/it_service/apple.png' %}" alt="#" width="140" height="50"/></li>
-              <li><img src="{% static 'images/it_service/lenovo.png' %}" alt="#" width="140" height="50"/></li>
+              <a href="{% url 'main:products-list-filtered-brand' 'asus' %}">
+                <li><img src="{% static 'images/it_service/asus.png' %}" alt="#" width="140" height="60"/></li>
+              </a>
+              <a href="{% url 'main:products-list-filtered-brand' 'hp' %}">
+                <li><img src="{% static 'images/it_service/hp.png' %}" alt="#" width="140" height="60"/></li>
+              </a>
+              <a href="{% url 'main:products-list-filtered-brand' 'acer' %}">
+                <li><img src="{% static 'images/it_service/acer.png' %}" alt="#" width="140" height="60"/></li>
+              </a>
+              <a href="{% url 'main:products-list-filtered-brand' 'apple' %}">
+                <li><img src="{% static 'images/it_service/apple.png' %}" alt="#" width="140" height="60"/></li>
+              </a>
+              <a href="{% url 'main:products-list-filtered-brand' 'lenovo' %}">
+                <li><img src="{% static 'images/it_service/lenovo.png' %}" alt="#" width="140" height="60"/></li>
+              </a>
             </ul>
           </div>
         </div>
@@ -425,6 +440,7 @@
     </div>
   </div>
 {% endif %}
+
 
 <div class="modal fade" id="search_bar" role="dialog">
   <div class="modal-dialog">
@@ -449,6 +465,7 @@
     </div>
   </div>
 </div>
+
 
 <footer class="footer_style_2">
   <div class="container-fuild">
@@ -476,6 +493,7 @@
   </div>
 </footer>
 
+
 <!-- js section -->
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -500,3 +518,4 @@
 <script src="{% static 'revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
 </body>
 </html>
+  

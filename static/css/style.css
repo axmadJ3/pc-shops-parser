@@ -3599,13 +3599,13 @@ footer ul.social_icons {
 	width: 19%;
 	text-align: center;
 	background: #f6f6f6;
-	padding: 25px 0;
+	padding: 25full text_align_center margin_bottom_30px 0;
 	margin: 0 .5%;
 	border: solid #eee 5px;
 }
 
 .map_section {
-	float: right;
+	float: right;full text_align_center margin_bottom_30
 	width: 35%;
 }
 
