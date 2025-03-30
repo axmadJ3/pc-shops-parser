@@ -98,7 +98,7 @@ def parse_zoodmall():
 
                         # Цена товара
                         price_element = product.find("div", class_="product-mini__totalLocalPrice")
-                        price = price_element.text.strip().replace("UZS", "").replace(" ", "").replace("\xa0", "") if price_element else "0"
+                        price = price_element.text.strip().replace("UZS", "").replace(",", "").replace(" ", "").replace("\xa0", "") if price_element else "0"
 
                         # Картинка товара
                         img_container = product.find("div", class_="product-mini__img")
@@ -108,7 +108,7 @@ def parse_zoodmall():
                         parsed_products.append(ProductData(
                             site="Zoodmall",
                             name=title,
-                            price=price,
+                            price=int(price),
                             url=full_link,
                             image_url=image_url
                         ))

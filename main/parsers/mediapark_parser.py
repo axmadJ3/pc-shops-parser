@@ -74,14 +74,14 @@ def parse_mediapark():
                     product_price = price_element.get_attribute("price")
 
                     img_element = wait.until(EC.presence_of_element_located((
-                        By.XPATH, "//img[contains(@class, 'object-cover')]"
+                        By.XPATH, "//img[contains(@class, 'object-contain')]"
                     )))
                     product_image = img_element.get_attribute("src")
 
                     parsed_products.append(ProductData(
                         site="Mediapark",
                         name=product_name,
-                        price=product_price,
+                        price=int(product_price),
                         url=link,
                         image_url=product_image
                     ))

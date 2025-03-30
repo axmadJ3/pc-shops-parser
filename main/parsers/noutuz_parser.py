@@ -93,7 +93,7 @@ def parse_noutuz():
 
                         # Цена товара
                         price_element = product.find("div", class_="product-item__footer").find("bdi")
-                        price = price_element.text.replace('сум', '').replace(" ", "").replace("\xa0", "") if price_element else "Нет в наличии"
+                        price = float(price_element.text.replace('сум', '').replace(" ", "").replace("\xa0", "") if price_element else "0")
 
                         # Картинка товара
                         img_container = link.find("div", class_="product-item__thumbnail")
@@ -103,7 +103,7 @@ def parse_noutuz():
                         parsed_products.append(ProductData(
                             site="Nout.uz",
                             name=title,
-                            price=price,
+                            price=int(price),
                             url=full_link,
                             image_url=image_url
                         ))

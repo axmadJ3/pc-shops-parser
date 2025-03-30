@@ -116,7 +116,7 @@ def parse_asaxiy():
                         parsed_products.append(ProductData(
                             site="Asaxiy",
                             name=title,
-                            price=price,
+                            price=int(price),
                             url=full_link,
                             image_url=image_url
                         ))

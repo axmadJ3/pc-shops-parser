@@ -62,11 +62,11 @@ def parse_glotr():
         # else:
         #     total_pages = 1
 
-        total_pages = 5
+        total_pages = 20
         logger.info(f"Найдено страниц: {total_pages}")
 
         for page_number in range(1, total_pages + 1):
-            url = f"{base_url}?page={page_number}"
+            url = f"{base_url}?page={page_number}&per-page=40"
             driver.get(url)
 
             WebDriverWait(driver, 10).until(
@@ -80,6 +80,7 @@ def parse_glotr():
                 logger.info(f"На странице {page_number} нет товаров")
                 continue
 
+            logger.info(f'Парсинг страницы: {page_number}')
             for product in products:
                 try:
                     link = product.find("a")
@@ -93,7 +94,17 @@ def parse_glotr():
                         title = link.get('href').replace("/", "").replace("-", " ")
 
                     price_element = product.find("div", class_="price-retail")
-                    price = price_element.get_text(strip=True).replace("so'm", "").replace(" ", "") if price_element else "0"
+                    if price_element:
+                        price_text = price_element.get_text(strip=True).replace("so'm", "").replace(" ", "").replace('сум', '')
+                        if price_text == 'Цена по запросу':
+                            price = 0
+                        else:
+                            try:
+                                price = float(price_text) if price_text else 0
+                            except ValueError:
+                                price = 0
+                    else:
+                        price = 0
 
                     # Картинка товара
                     img_container = product.find("div", class_="product-card__header").find("div", class_="product-card__swiper-item")
@@ -120,7 +131,7 @@ def parse_glotr():
                     parsed_products.append(ProductData(
                         site="Glotr",
                         name=title,
-                        price=price,
+                        price=int(price),
                         url=full_link,
                         image_url=image_url
                     ))

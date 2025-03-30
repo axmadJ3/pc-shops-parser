@@ -4,7 +4,7 @@ from django.db import models
 class Product(models.Model):
     site = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
-    price = models.CharField(max_length=50)
+    price = models.IntegerField()
     url = models.URLField(max_length=500, unique=True)
     image_url = models.URLField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
