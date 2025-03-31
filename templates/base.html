@@ -66,7 +66,7 @@
                   <a class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'main:about' %}">Biz xaqimizda</a>
                 </li>
                 <li> 
-                  <a class="{% if request.resolver_match.url_name == 'products-list' %}active{% endif %}" href="{% url 'main:products-list' %}">Mahsulotlar</a>
+                  <a class="{% if request.resolver_match.url_name == 'products-list' %}active{% endif %}" href="{% url 'main:products-list' %}">Barcha noutbuklar</a>
                 </li>
               </ul>
             </div>
@@ -482,6 +482,15 @@
               <li><a href="https://mediapark.uz/products/category/noutbuki-i-ultrabuki-22/noutbuki-313"><i class="fa fa-angle-right"></i> MediaPark </a></li>
               <li><a href="https://www.zoodmall.uz/category/3053/noutbuklar/"><i class="fa fa-angle-right"></i> Zoodmall </a></li>
               <li><a href="https://nout.uz/product-category/laptops/"><i class="fa fa-angle-right"></i> Nout.uz </a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div class="main-heading left_text">
+              <h2>Navigatsiya</h2>
+            </div>
+            <ul class="footer-menu">
+              <li><a href="{% url 'main:products-list' %}"><i class="fa fa-angle-right"></i> Barcha noutbuklar </a></li>
+              <li><a href="{% url 'main:about' %}"><i class="fa fa-angle-right"></i> Biz haqimizda </a></li>
             </ul>
           </div>
         </div>

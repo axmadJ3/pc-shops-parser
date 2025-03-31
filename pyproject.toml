@@ -9,6 +9,7 @@ dependencies = [
     "django>=5.1.7",
     "django-admin-rangefilter>=0.13.2",
     "django-debug-toolbar==4.4.6",
+    "django-jazzmin>=3.0.1",
     "lxml>=5.3.1",
     "requests>=2.32.3",
     "ruff>=0.9.10",
