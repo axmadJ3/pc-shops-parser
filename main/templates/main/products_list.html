@@ -29,10 +29,10 @@
                             </div>
                             <div class="product_detail_btm">
                                 <div class="center">
-                                <h4><a href="{% url 'main:product-detail' product.pk %}">{{ product.name|truncatechars:50 }}</a></h4>
+                                <h4><a href="{% url 'main:product-detail' product.pk %}">{{ product.name|truncatechars:80 }}</a></h4>
                                 </div>
-                                <div class="product_price">...
-                                    <span class="new_price">{{ product.price|floatformat:2|intcomma }}</span><b> Uzs</b></p>
+                                <div class="product_price">
+                                    <p><span class="new_price">{{ product.price|floatformat:2|intcomma }}</span><b> Uzs</b></p>
                                 </div>
                             </div>
                             </div>
@@ -47,16 +47,6 @@
 
         <div class="col-md-3">
             <div class="side_bar">
-                <div class="side_bar_blog">
-                    <h4>QIDIRISH</h4>
-                    <div class="side_bar_search">
-                    <div class="input-group stylish-input-group">
-                        <input class="form-control" placeholder="Qidirish uchun..." type="text">
-                        <span class="input-group-addon">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </span> </div>
-                    </div>
-                </div>
                 <div class="side_bar_blog">
                     <h4>Onlayn do'konlar </h4>
                     <div class="categary">

@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 
 from main.models import Product
@@ -14,15 +15,22 @@ def home(request):
 
 
 def products_list(request, site=None, brand=None):
-    products = Product.objects.all()
+    if query := request.GET.get('query'):
+        words = query.split()
+        filters = Q()
+        for word in words:
+            filters &= Q(name__icontains=word)
+        products = Product.objects.filter(filters).order_by('price')
+    else:
+        products = Product.objects.all()
 
     if site:
-        products = products.filter(site=site)
+        products = products.filter(site=site).order_by('price')
     if brand:
-        products = products.filter(name__icontains=brand)  # Поиск без учета регистра
+        products = products.filter(name__icontains=brand).order_by('price')
 
     brands = ['Apple', 'Samsung', 'Huawei', 'Lenovo', 'HP', 'Dell', 'Asus', 'Acer', 'MSI']
-    paginator = Paginator(products, 12)  # 12 товаров на страницу
+    paginator = Paginator(products, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

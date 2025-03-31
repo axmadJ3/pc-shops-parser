@@ -3167,6 +3167,7 @@ span.skill {
 .product_price p {
 	margin: 0;
 	text-align: center;
+	color: #000;
 }
 
 .old_price {
@@ -3178,7 +3179,7 @@ span.skill {
 .new_price {
 	font-size: 18px;
 	font-weight: 600;
-	color: #000;
+	color: #17a5e9;
 }
 
 .recent_item {
