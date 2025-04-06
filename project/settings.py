@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+from celery.schedules import crontab
+
 from .jazzmin import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
 
     #third-party
     'debug_toolbar',
+    'django_celery_beat',
 
     #local
     'main',
@@ -143,3 +146,32 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 JAZZMIN_UI_TWEAKS = JAZZMIN_UI_TWEAKS
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # URL для брокера сообщений, указывайте свой
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Результат выполнения задачи будет храниться в Redis
+CELERY_TIMEZONE = 'UTC +5'
+
+CELERY_BEAT_SCHEDULE = {
+    'run_glotr_parser-task': {
+        'task': 'project.main.tasks.run_glotr_parser',
+        'schedule': crontab(minute='0', hour='7', day_of_week='1'),
+    },
+    'run_asaxiy_parser-task': {
+        'task': 'project.main.tasks.run_asaxiy_parser',
+        'schedule': crontab(minute='0', hour='7', day_of_week='2'),
+    },
+    'run_mediapark_parser-task': {
+        'task': 'project.main.tasks.run_mediapark_parser',
+        'schedule': crontab(minute='0', hour='7', day_of_week='3'),
+    },
+    'run_zoodmall_parser-task': {
+        'task': 'project.main.tasks.run_zoodmall_parser',
+        'schedule': crontab(minute='0', hour='7', day_of_week='4'),
+    },
+    'run_noutuz_parser-task': {
+        'task': 'project.main.tasks.run_noutuz_parser',
+        'schedule': crontab(minute='0', hour='7', day_of_week='5'),
+    },
+}

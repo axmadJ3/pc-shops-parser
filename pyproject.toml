@@ -6,11 +6,15 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.13.3",
+    "celery>=5.5.0",
     "django>=5.1.7",
     "django-admin-rangefilter>=0.13.2",
+    "django-celery-beat>=2.7.0",
     "django-debug-toolbar==4.4.6",
     "django-jazzmin>=3.0.1",
+    "importlib-metadata==4.13.0",
     "lxml>=5.3.1",
+    "redis>=5.2.1",
     "requests>=2.32.3",
     "ruff>=0.9.10",
     "selenium>=4.29.0",
