@@ -48,6 +48,4 @@
    python main.py
    ```
 
-## Muallif
-- **GitHub** - [axmadJ3](https://github.com/axmadJ3)
 
