@@ -9,12 +9,16 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
+from dotenv import load_dotenv()
 from celery.schedules import crontab
 
 from .jazzmin import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,12 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l&lukn_!=v3_%rf6f(z1w*236v+ebl5)+&$i@%o1f2qscfpob&'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['13.53.239.27']
+ALLOWED_HOSTS = os.getenv('DJANGO_ALOWED_HOSTS', 'localhost').split(',')
 
 # Application definition
 
