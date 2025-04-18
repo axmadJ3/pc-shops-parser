@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv()
+from dotenv import load_dotenv
 from celery.schedules import crontab
 
 from .jazzmin import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
