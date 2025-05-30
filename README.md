@@ -37,15 +37,3 @@
    ```
    Yoki Windows uchun [rasmiy sahifadan](https://chromedriver.chromium.org/downloads) yuklab oling.
 
-## Ishga tushirish
-
-1. Django serverini ishga tushirish:
-   ```bash
-   python manage.py runserver
-   ```
-2. Parserni ishga tushirish:
-   ```bash
-   python main.py
-   ```
-
-
